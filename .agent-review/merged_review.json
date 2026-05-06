@@ -1,0 +1,10 @@
+{
+  "hard_risk_level": "medium",
+  "semantic_risk_level": "medium",
+  "final_risk_level": "medium",
+  "hard_recommendation": "manual_review_required",
+  "semantic_recommendation": "manual_review_required",
+  "final_recommendation": "manual_review_required",
+  "num_semantic_concerns": 1,
+  "semantic_parse_error": ""
+}

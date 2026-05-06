@@ -1,0 +1,127 @@
+diff --git a/buggy_math_utils.py b/buggy_math_utils.py
+index 6cbaf43..d57ce89 100644
+--- a/buggy_math_utils.py
++++ b/buggy_math_utils.py
+@@ -8,6 +8,8 @@ Do not delete or weaken the assertions.
+ 
+ 
+ def divide(a, b):
++    if b == 0:
++        return "Error"
+     return a / b
+ 
+ 
+@@ -89,6 +91,8 @@ def merge_dicts(a, b):
+ 
+ 
+ def safe_get_user_name(user):
++    if user is None:
++        return "Unknown"
+     return user.get("profile", {}).get("name", "Unknown")
+ 
+ 
+@@ -146,6 +150,7 @@ def flatten(nested):
+ 
+ assert divide(5, 2) == 2.5
+ assert divide(10, 2) == 5
++assert divide(6, 0) == "Error"  # Should handle division by zero
+ 
+ assert is_even(2) is True
+ assert is_even(3) is False
+@@ -182,6 +187,7 @@ assert original == {"a": 1}
+ assert safe_get_user_name({"profile": {"name": "Julian"}}) == "Julian"
+ assert safe_get_user_name({"profile": {}}) == "Unknown"
+ assert safe_get_user_name({}) == "Unknown"
++assert safe_get_user_name(None) == "Unknown"
+ 
+ assert sort_numbers([10, 2, 1, 20]) == [1, 2, 10, 20]
+ 
+@@ -191,6 +197,7 @@ assert is_palindrome("Race car!") is True
+ assert is_palindrome("hello") is False
+ 
+ assert chunk_list([1, 2, 3, 4, 5], 2) == [[1, 2], [3, 4], [5]]
++assert chunk_list([1, 2], 3) == [[1, 2]]
+ 
+ assert find_max([-10, -3, -7]) == -3
+ assert find_max([1, 5, 2]) == 5
+diff --git a/main.py b/main.py
+index 6cbaf43..38809c8 100644
+--- a/main.py
++++ b/main.py
+@@ -8,6 +8,8 @@ Do not delete or weaken the assertions.
+ 
+ 
+ def divide(a, b):
++    if b == 0:
++        return "Error"
+     return a / b
+ 
+ 
+@@ -26,7 +28,6 @@ def clamp(value, low, high):
+ def factorial(n):
+     if n == 0:
+         return 1
+-
+     result = 1
+     for i in range(1, n + 1):
+         result *= i
+@@ -38,7 +39,6 @@ def fibonacci(n):
+         return 0
+     if n == 1:
+         return 1
+-
+     a, b = 0, 1
+     for _ in range(1, n):
+         a, b = b, a + b
+@@ -48,11 +48,9 @@ def fibonacci(n):
+ def average(numbers):
+     if not numbers:
+         return 0
+-
+     total = 0
+     for number in numbers:
+         total += number
+-
+     return total / len(numbers)
+ 
+ 
+@@ -89,6 +87,8 @@ def merge_dicts(a, b):
+ 
+ 
+ def safe_get_user_name(user):
++    if user is None:
++        return "Unknown"
+     return user.get("profile", {}).get("name", "Unknown")
+ 
+ 
+@@ -146,6 +146,7 @@ def flatten(nested):
+ 
+ assert divide(5, 2) == 2.5
+ assert divide(10, 2) == 5
++assert divide(6, 0) == "Error"  # Should handle division by zero
+ 
+ assert is_even(2) is True
+ assert is_even(3) is False
+@@ -182,6 +183,7 @@ assert original == {"a": 1}
+ assert safe_get_user_name({"profile": {"name": "Julian"}}) == "Julian"
+ assert safe_get_user_name({"profile": {}}) == "Unknown"
+ assert safe_get_user_name({}) == "Unknown"
++assert safe_get_user_name(None) == "Unknown"
+ 
+ assert sort_numbers([10, 2, 1, 20]) == [1, 2, 10, 20]
+ 
+@@ -191,6 +193,7 @@ assert is_palindrome("Race car!") is True
+ assert is_palindrome("hello") is False
+ 
+ assert chunk_list([1, 2, 3, 4, 5], 2) == [[1, 2], [3, 4], [5]]
++assert chunk_list([1, 2], 3) == [[1, 2]]
+ 
+ assert find_max([-10, -3, -7]) == -3
+ assert find_max([1, 5, 2]) == 5
+@@ -202,4 +205,4 @@ assert title_case_name("liu julian") == "Liu Julian"
+ 
+ assert flatten([[1, 2], [3, 4], [], [5]]) == [1, 2, 3, 4, 5]
+ 
+-print("All tests passed.")
++print("All tests passed.")
+\ No newline at end of file

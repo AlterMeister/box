@@ -28,6 +28,7 @@ def clamp(value, low, high):
 def factorial(n):
     if n == 0:
         return 1
+
     result = 1
     for i in range(1, n + 1):
         result *= i
@@ -39,6 +40,7 @@ def fibonacci(n):
         return 0
     if n == 1:
         return 1
+
     a, b = 0, 1
     for _ in range(1, n):
         a, b = b, a + b
@@ -48,9 +50,11 @@ def fibonacci(n):
 def average(numbers):
     if not numbers:
         return 0
+
     total = 0
     for number in numbers:
         total += number
+
     return total / len(numbers)
 
 
