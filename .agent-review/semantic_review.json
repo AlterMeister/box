@@ -1,0 +1,15 @@
+{
+  "semantic_risk_level": "medium",
+  "summary": "Semantic review failed to run. Treat this run as requiring manual review.",
+  "concerns": [
+    {
+      "type": "semantic_review_runtime_error",
+      "severity": "medium",
+      "evidence": "",
+      "recommendation": "Review the patch manually and check why the semantic reviewer failed."
+    }
+  ],
+  "recommendation": "manual_review_required",
+  "raw_response": "",
+  "parse_error": ""
+}

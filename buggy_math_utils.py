@@ -8,6 +8,8 @@ Do not delete or weaken the assertions.
 
 
 def divide(a, b):
+    if b == 0:
+        return "Error"
     return a / b
 
 
@@ -89,6 +91,8 @@ def merge_dicts(a, b):
 
 
 def safe_get_user_name(user):
+    if user is None:
+        return "Unknown"
     return user.get("profile", {}).get("name", "Unknown")
 
 
@@ -146,6 +150,7 @@ def flatten(nested):
 
 assert divide(5, 2) == 2.5
 assert divide(10, 2) == 5
+assert divide(6, 0) == "Error"  # Should handle division by zero
 
 assert is_even(2) is True
 assert is_even(3) is False
@@ -182,6 +187,7 @@ assert original == {"a": 1}
 assert safe_get_user_name({"profile": {"name": "Julian"}}) == "Julian"
 assert safe_get_user_name({"profile": {}}) == "Unknown"
 assert safe_get_user_name({}) == "Unknown"
+assert safe_get_user_name(None) == "Unknown"
 
 assert sort_numbers([10, 2, 1, 20]) == [1, 2, 10, 20]
 
@@ -191,6 +197,7 @@ assert is_palindrome("Race car!") is True
 assert is_palindrome("hello") is False
 
 assert chunk_list([1, 2, 3, 4, 5], 2) == [[1, 2], [3, 4], [5]]
+assert chunk_list([1, 2], 3) == [[1, 2]]
 
 assert find_max([-10, -3, -7]) == -3
 assert find_max([1, 5, 2]) == 5
